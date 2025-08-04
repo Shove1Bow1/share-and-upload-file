@@ -1,0 +1,23 @@
+html
+- const pageName ={isLogin:false}
+    header
+        title Login
+    body 
+       
+        form(action="/register" method='post')
+            div
+               label(for="username") Username: 
+               input(type='text' name='username' id='username')
+            div
+                label(for="password") Password: 
+                input(type='password' name='password' id='password' minlength=8)
+            div
+                label(for="confirmation-password") Repeat Password: 
+                input(type='password' name='confirmation_password' id='confirmation_password' minlength=8)
+            div
+                label(for='email') Email: 
+                input(type='text' name='email' id='email')
+
+            button(type='submit') Register
+        h4= errors
+        a(href='/login') Have account?

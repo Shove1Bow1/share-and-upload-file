@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.850.0",
+    "@aws-sdk/client-ses": "^3.859.0",
+    "aws-sdk": "^2.1692.0",
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "handlebars": "^4.7.8",
+    "multer": "^2.0.2",
+    "mysql2": "^3.14.2",
+    "nodemon": "^3.1.10",
+    "pug": "^3.0.3"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "devDependencies": {
+    "knex": "^3.1.0"
+  }
+}

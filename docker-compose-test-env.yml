@@ -1,0 +1,32 @@
+## THIS IS USED FOR TESTER ENVIRONMENT
+version: '3.8'
+services:
+  database-rsb:
+    image: mysql:9.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PASS_RSB}
+      MYSQL_DATABASE: ${DB_RSB}
+      MYSQL_USER: ${PASS_RSB}
+      MYSQL_PASSWORD: ${PASS_RSB}
+    ports:
+      - "3306:3306"
+    volumes:
+      - file-uploader-rsb:/var/lib/mysql
+    restart: unless-stopped
+  database-non-rsb:
+    image: mongoose:7.0.22
+    container_name: database-non-rsb
+    ports:
+      - 27018:27017
+    volumes:
+      - /mnt/host/f/data/non-rsb:/data/db
+      - /mnt/host/f/data/non-rsb:/data/configdb
+      - /mnt/host/f/data/non-rsb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:rw
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=felix
+      - MONGO_DATABASE=file-uploader
+    restart: always
+volumes:
+  file-uploader-rsb:

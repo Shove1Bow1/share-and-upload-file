@@ -1,0 +1,78 @@
+html 
+    header 
+        title Home
+        style.
+            .email-input{
+                border-radius: 2px;
+                width:40%;
+                height:50px;
+                size:12px;
+            }
+            .email-tag{
+                display: inline-block;
+                border: 1px solid black;
+                border-radius: 15px;
+                padding: 2px 5px;
+                margin: 3px;
+            }
+            .email-tag .remove{
+                margin-left: 5px;
+                cursor: pointer;
+            }
+    body 
+        h1 Welcome, #{username}
+        h2 Upload your file here
+        form(action="/sharing-file" method='post' enctype="multipart/form-data" id="upload-form")
+            .form-group
+                p choose your file execpt .exe
+                div
+                    input(type='file' id='file' name='file' onchange="validateFile(this)")
+                    span(id='file-error')
+            .form-group 
+                p Enter up to 5 emails that you want to send to
+                div
+                    span You can seperate each email by comma or semi-comma
+                div 
+                    textarea.email-input(id='email-input email-container emails' name='emails' onfocusout="checkNumberOfEmails(this)")
+                    span(id='email-error')
+            button(type='submit') upload
+        h4(id='error-from-server')=error
+        a(href='/logout') Log out
+        script. 
+            function validateFile(input){
+                const errorElement = document.getElementById('file-error');
+                const file = input.files[0];
+
+                if (file) {
+                    const fileName = file.name.toLowerCase();
+                    if (fileName.endsWith('.exe')) {
+                        errorElement.textContent = "EXE files are not allowed!";
+                        errorElement.style.display = 'block';
+                        input.value = ''; // Clear the selection
+                    } else {
+                        errorElement.style.display = 'none';
+                }
+            }}
+            function checkNumberOfEmails(input){
+                const error=document.getElementById('email-error');
+                const xReg=/[;,]/;
+                const emailReg=/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g
+                let errors="";
+                let x=input.value.split(xReg);
+                if(x.length>5){
+                    error.innerHTML='<span> The number of emails exceed 5<span>'
+                }
+                let isChecked=false;
+                x.forEach(email=>{
+                    if(!email.trim().match(emailReg)){
+                        isChecked=true;
+                        errors+=email + " is not an email.\n";
+                    }
+                })
+                console.log(errors)
+                error.innerHTML=errors;
+                error.style.display='block';
+                if(isChecked) input.value=''
+            };
+           
+

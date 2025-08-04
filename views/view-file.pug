@@ -1,0 +1,18 @@
+html 
+    header
+        title View File 
+    body
+        h4 File Name #{fileName} 
+        h4 File Type #{fileType} 
+        h4 Person who share the file #{owner}
+        div 
+            p This file can only download one time
+        a.download-button(id="direct-page" href=`/download/?file_id=${fileId}&file_name=${fileName}` data-redirect='/') Download this file
+        script. 
+            document.getElementById('direct-page').addEventListener('click', (e)=>{
+                window.alert("Directing to main page of uploading sharing file, file will be downloaded after closing this alert")
+                this.disabled =true;
+                setTimeout(()=>{
+                    window.location.href='/';
+                }, 5000)
+            })
