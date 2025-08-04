@@ -41,15 +41,13 @@ app.post('/register', async (req, res) => {
     if (isChecked) {
         res.render('register', { errors: error })
     }
-    if (password != confirmation_password) {
+    if (password != confirmation_password && password.length<8 && confirmation_password.length<8) {
         res.render('register', {
             errors: "password and confirmation password doesn't match"
         })
     }
     else {
-        console.log(username);
         const account = await existAccount(email, username, res);
-        console.log(account);
         if (account) {
             const user = await registration(username, password, email)
             req.session.userId = user.user_id
@@ -57,7 +55,7 @@ app.post('/register', async (req, res) => {
             if (user)
                 res.redirect('home')
         }
-        res.render('register',{errors: "Account already created"});
+        else res.render('register',{errors: "Account already created"});
     }
 })
 app.get('/home', (req, res) => {

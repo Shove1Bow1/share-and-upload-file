@@ -235,7 +235,6 @@ async function existAccount(email, userName, res){
 
     if(emailChecked){
         const existEmail=await retrieveOwner(emailChecked[0], userName);
-
         if(existEmail){
             res.render('/register', {errors: "Email or name is already used"});
             return;

@@ -60,7 +60,10 @@ html
                 let errors="";
                 let x=input.value.split(xReg);
                 if(x.length>5){
-                    error.innerHTML='<span> The number of emails exceed 5<span>'
+                    error.innerHTML='Exceed 5 emails'
+                    error.style.display='block'
+                    input.value=''
+                    return;
                 }
                 let isChecked=false;
                 x.forEach(email=>{
