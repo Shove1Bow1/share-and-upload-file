@@ -7,3 +7,4 @@ To start this program:
 5. Use "npm start" to run the server
 Enjoy!!
 Note: This is the first version so server sometimes maybe unstable, and code can be messy. Will try to update the code later
+2#Note: Create a default Downloads if you are using EC2, using command "mkdir ~/Downloads" for linux system 
